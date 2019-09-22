@@ -1,0 +1,12 @@
+[package]
+name = "guessing_game"
+version = "0.1.0"
+authors = ["denglitong <litongdeng@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+# 0.3.14 是语义化版本，是 ^0.3.14 的简写
+# 它表示"任何与0.3.14版本共有API项兼容的版本"，这是语义化版本的强大之处！
+rand = "0.3.14"
