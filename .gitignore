@@ -2,3 +2,4 @@
 **/*.rs.bk
 .idea/
 **/target/
+.DS_Store
