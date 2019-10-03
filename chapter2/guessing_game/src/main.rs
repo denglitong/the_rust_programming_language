@@ -66,13 +66,47 @@ fn main() {
         // 一个分支包含一个 模式（pattern）和表达式开头的值与分支模式相匹配时应执行的代码
         // match 结果和模式是 Rust 中强大的功能，它体现了代码可能遇到的多种清晰，
         // 并帮助你确保没有遗漏处理
-        match guess.cmp(&secret_number) {
-            Ordering::Less => println!("Too small!"), // 分支1，分支如果没有匹配就继续向下走
-            Ordering::Greater => println!("Too big!"), // 分支2，分支匹配后执行完代码就会自动退出match
+        //        match guess.cmp(&secret_number) {
+        //            Ordering::Less => println!("Too small!"), // 分支1，分支如果没有匹配就继续向下走
+        //            Ordering::Greater => println!("Too big!"), // 分支2，分支匹配后执行完代码就会自动退出match
+        //            Ordering::Equal => {
+        //                println!("You win!");
+        //                break; // 退出 loop 循环
+        //            }
+        //        }
+
+        // 有效范围检查
+        //        if guess < 1 || guess > 100 {
+        //            println!("The secret number will be between 1 and 100.");
+        //            continue;
+        //        }
+        // 使用自定义类型来确保范围有效
+        let g = Guess::new(guess);
+        match g.value().cmp(&secret_number) {
+            Ordering::Less => println!("Too small!"),
+            Ordering::Greater => println!("Too big!"),
             Ordering::Equal => {
                 println!("You win!");
-                break; // 退出 loop 循环
+                break;
             }
         }
+    }
+}
+
+pub struct Guess {
+    value: u32,
+}
+
+impl Guess {
+    pub fn new(value: u32) -> Guess {
+        if value < 1 || value > 100 {
+            panic!("Guess value must be between 1 and 100, got {}", value);
+        }
+        Guess { value }
+    }
+
+    // 熟悉的 getter
+    pub fn value(&self) -> u32 {
+        self.value
     }
 }
