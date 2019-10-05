@@ -10,7 +10,7 @@ fn main() {
     // println!("{:?}", args);
 
     // unwrap_or_else 在 Err 时会调用一个 closure
-    let config = Config::new(&args).unwrap_or_else(|err| {
+    let config = Config::new(env::args()).unwrap_or_else(|err| {
         // 将错误信息输出到 stderr
         eprintln!("Problem parsing arguments: {}", err);
         process::exit(1);
