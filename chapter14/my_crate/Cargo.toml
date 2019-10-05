@@ -1,0 +1,20 @@
+[package]
+name = "my_crate_denglitong"
+version = "0.1.1"
+authors = ["denglitong <litongdeng@gmail.com>"]
+edition = "2018"
+license = "MIT"
+description = "Learn cargo publish crate."
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+[profile.dev]
+opt-level = 0
+
+# opt-level 设置控制 Rust 会对代码进行何种程度的优化，该值从 0 到 3，
+# 越高的优化级别需要更多的世界编译，dev 默认为 0，release 默认为 3
+
+[profile.release]
+opt-level = 3
