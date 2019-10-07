@@ -1,0 +1,15 @@
+[package]
+name = "advanced_features"
+version = "0.1.0"
+authors = ["denglitong <litongdeng@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+# cargo build 生成动态库，
+# lib.rs 中导出的函数将被导出到动态库，可被其他语言动态链接，如 C 语言
+[lib]
+name = "rust_hello"
+crate-type = ["dylib"]
