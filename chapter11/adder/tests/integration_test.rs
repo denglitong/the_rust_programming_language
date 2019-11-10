@@ -4,6 +4,7 @@
 // Cargo 只会在运行 cargo test 时编译这个目录中的文件
 
 use adder::add_two;
+use adder::Rectangle;
 
 // 引入 tests/common 对应的 common 模块
 mod common;

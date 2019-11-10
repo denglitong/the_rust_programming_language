@@ -14,10 +14,13 @@
 // 跟踪哪部分代码正在使用堆上的哪些数据，最大限度的减少堆上的重复数据的数量，以及清理堆上不再使用的数据确保不会耗尽空间
 // 这些问题正是所有权（ownership）系统要处理的
 
-// 所有权的规则：
-// 1.Rust 中的每一个值都有一个被称为其 所有者（owner）的变量
-// 2.值有且只有一个所有者
-// 3.当所有者（变量）离开作用域，这个值被丢弃
+/// 所有权的规则：
+/// 1.Rust 中的每一个值都有一个被称为其 所有者（owner）的变量 Each value in Rust has a variable that's called its owner
+/// 2.值有且只有一个所有者 There can only be one owner at a time
+/// 3.当所有者（变量）离开作用域，这个值被丢弃 When the owner goes out of scope, the value will be dropped
+
+mod strings;
+
 fn main() {
     // variable scope
     {
@@ -48,7 +51,7 @@ fn main() {
 
     // 变量和数据交互的方式1：移动（move）
     let x = 5; // 将 5 绑定到 x
-    let y = x; // 生成一个值 x 的拷贝并绑定到 y，因为整数是已知固定大小的简单值，所以这两个5倍放入了栈中
+    let y = x; // 生成一个值 x 的拷贝并绑定到 y，因为整数是已知固定大小的简单值，所以这两个5被放入了栈中
     println!("{}", x);
     let s1 = String::from("hello");
     let s2 = s1; // 我们从栈上拷贝了s1的ptr、len、capacity，但并没有复制ptr所指向的堆上数据
