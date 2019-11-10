@@ -1,12 +1,27 @@
-// 生命周期（lifetimes）是一种泛型 generics，不同于其他泛型帮助我们确保类型拥有期望的行为，
-// 声明周期则有助于确保引用在我们需要的时候一直有效
+/// Lifetimes, a variety of generics that give the compiler information
+/// about references relate to each other. Lifetimes allow us to borrow values in many situations
+/// while still enabling the compiler to check that the references are valid.
+///
+/// 生命周期（lifetimes）是一种泛型 generics，不同于其他泛型帮助我们确保类型拥有期望的行为，
+/// 声明周期则有助于确保引用在我们需要的时候一直有效
 
-// Rust 中的每一个引用都有其 lifetimes，即引用保持有效的 scope
-// 像 type 能自动推断一样，lifetimes 也隐含能自动推断，
-// 但是也像 type 在可能有多种的时候必须注明类型，
-// lifetimes 在不同方式相关联的时候，也需要我们使用 generics lifetimes 参数来注明他们的关系
-// 这样就能确保运行时实际使用的引用绝对是有效的（野指针的福音！，生命周期的主要目标就是避免悬垂指针）
-
+/// Rust 中的每一个引用都有其 lifetimes，即引用保持有效的 scope
+/// 像 type 能自动推断一样，lifetimes 也隐含能自动推断，
+/// 但是也像 type 在可能有多种的时候必须注明类型，
+/// lifetimes 在不同方式相关联的时候，也需要我们使用 generics lifetimes 参数来注明他们的关系
+/// 这样就能确保运行时实际使用的引用绝对是有效的（野指针的福音！，生命周期的主要目标就是避免悬垂指针）
+///
+/// Lifetime syntax is about connecting the lifetimes of various parameters and return value of functions.
+/// Once they're connected, Rust has enough information to allow memory-safe operations and disallow
+/// operations that would create dangling pointers or otherwise violate memory safety.
+/// Lifetimes on function or method parameters are called input lifetimes, and lifetimes on return
+/// values are called output lifetimes.
+/// lifetime elision rules:
+/// 1. each parameter that is a reference gets its own lifetime parameter
+/// 2. if there is exactly one input lifetime parameter, that lifetime is assigned to all output lifetime parameters
+/// 3. if there are multiple input lifetime parameters, but one of them is &self or &mut self,
+///     the lifetime of self is assigned to all output lifetime parameters
+/// If Rust cannot indicate lifetimes after apply above 3 rules, the compiler will ask us to explicitly annotate lifetimes
 use std::fmt::Display;
 
 fn main() {
